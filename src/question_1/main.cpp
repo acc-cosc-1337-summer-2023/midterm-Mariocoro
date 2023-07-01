@@ -1,6 +1,30 @@
+#include <string>
+#include <iostream>
+#include <limits>
+#include <math.h>
+using namespace std;
 
-int main()
-{
+const char hexDigits[] = "0123456789ABCDEF";
 
-    return 0;
+string decimal_to_hex(int input) {
+	string output;
+	while (input != 0) {
+		int mod = input & 15;
+		output = hexDigits[mod] + output;
+		input >>= 4;
+	}
+	return output;
+}
+
+int main() {
+	while (true) {
+		int i = 0;
+		cout << "Enter a number: ";
+		if (!(cin >> i) && cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		} else if (i >= 1 && i <= 512) {
+			cout << decimal_to_hex(i) << endl;
+		}
+	}
 }
